@@ -1,0 +1,30 @@
+.header{
+    background-color: slategray;
+    padding:10px;
+    color:white;
+    display: flex;
+    justify-content:space-around;
+}
+.cardsDiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    place-items: center;
+}
+
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+button{
+    background-color: blue;
+    color:white
+}
+.link{
+color: white;
+text-decoration: none;
+}
