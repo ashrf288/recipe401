@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 import {Card,Button} from 'react-bootstrap';
-import './styles.css'
+import './styles.css';
+import { withAuth0 } from "@auth0/auth0-react";
 export class Favorites extends Component {
   constructor(){
     super()
@@ -16,10 +17,15 @@ export class Favorites extends Component {
       })
 
    }
-  componentDidMount = () => {
-      axios.get(`${process.env.React_APP_BASEURL}/fav`).then(resp=>{
-         this.setState({data:resp.data})
+  componentDidMount = () => { 
+    if(this.props.auth0.isAuthenticated){
+      axios.get(`${process.env.React_APP_BASEURL}/fav/${this.props.auth0.user.email}`).then(resp=>{
+        console.log(resp.data);
+        
+         this.setState({data:resp.data[0].recipes})
       })
+    }                        
+     
   
   };
 
@@ -41,4 +47,4 @@ export class Favorites extends Component {
   }
 }
 
-export default Favorites;
+export default withAuth0(Favorites);

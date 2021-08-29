@@ -14,17 +14,8 @@ export class Cards extends Component {
     
   addToFav=(recipe)=>{
     if(this.props.auth0.isAuthenticated){
-      axios.get(`${process.env.React_APP_BASEURL}/fav`).then(resp=>{
-        this.setState({favData:resp.data})
-        let hasRecipe=this.state.favData.filter(rec=>{
-          return rec.name===recipe.name
-        })   
-        console.log(hasRecipe);
-        if(hasRecipe.length===0){
-          axios.post(`${process.env.React_APP_BASEURL}/add`,recipe).then(resp=>{
-            console.log(resp.data)
-         })
-        }else{console.log('already selected');}
+      axios.post(`${process.env.React_APP_BASEURL}/add/${this.props.auth0.user.email}`,recipe).then(resp=>{
+        this.setState({favData:resp.data}) 
         
      })
      
